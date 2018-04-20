@@ -1,6 +1,6 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
+    "name": "cqs/api-boilerplate",
+    "description": "API Boilerplate with Lumen",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\User;
-use Illuminate\Support\Facades\Gate;
+use App\Http\Model\User;
+use App\Http\Model\AccessTokens;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -31,9 +31,45 @@ class AuthServiceProvider extends ServiceProvider
         // the User instance via an API token or any other method necessary.
 
         $this->app['auth']->viaRequest('api', function ($request) {
+
+            $headers=$request->headers->all();
+
+            if(!empty($headers['x-access-token'][0])) {
+                return $this->findIdentityByAccessToken($headers['x-access-token'][0]);
+            }
+
+            /*
             if ($request->input('api_token')) {
                 return User::where('api_token', $request->input('api_token'))->first();
             }
+            */
         });
+    }
+    public function findIdentityByAccessToken($token)
+    {
+        $access_token = AccessTokens::where(['token' => $token])->first();
+
+        if ($access_token) {
+            if ($access_token->expires_at < time()) {
+
+                $response = [
+                    'status' => 'errors',
+                    'message' => "Access token expired"
+                ];
+                response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
+                die;
+
+            }
+
+            return User::where(['id'=>$access_token->user_id])->first();
+            
+        } else {
+            $response = [
+                'status' => 'errors',
+                'message' => "Access token not found"
+            ];
+            response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
+            die;
+        }
     }
 }
