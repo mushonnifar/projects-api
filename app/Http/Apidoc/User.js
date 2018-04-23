@@ -32,7 +32,6 @@
  * @apiParam {String} username username user
  * @apiParam {String} password password user
  * @apiParam {String} email email user
- * @apiParam {Integer} unit_id id unit kerja
  *
  * @apiSuccess {String} status success
  * @apiSuccess {String} message data has been added
@@ -40,7 +39,6 @@
  * @apiSuccess {String} data.name nama user
  * @apiSuccess {String} data.username username user
  * @apiSuccess {String} data.email email user
- * @apiSuccess {Integer} data.unit_id id unit kerja
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {Integer} data.id id user
@@ -77,8 +75,6 @@
  * @apiSuccess {String} name nama user
  * @apiSuccess {String} username username user
  * @apiSuccess {String} email email user
- * @apiSuccess {Integer} unit_id id unit kerja
- * @apiSuccess {String} unit_name nama unit kerja
  * @apiSuccess {Timestamp} updated_at waktu update data
  * @apiSuccess {Timestamp} created_at waktu create data
  * @apiSuccess {String} token kode token baru
@@ -105,7 +101,6 @@
  * @apiSuccess {String} data.name nama user
  * @apiSuccess {String} data.username username user
  * @apiSuccess {String} data.email email user
- * @apiSuccess {Integer} data.unit_id id unit kerja
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
@@ -153,8 +148,6 @@
  * @apiSuccess {String} data.name nama user
  * @apiSuccess {String} data.username username user
  * @apiSuccess {String} data.email email user
- * @apiSuccess {Integer} data.unit_id id unit kerja
- * @apiSuccess {String} data.unit_name nama unit kerja
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru

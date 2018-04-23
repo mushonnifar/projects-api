@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'name', 'created_by', 'updated_by', 'unit_id'
+        'username', 'email', 'password', 'name', 'created_by', 'updated_by'
     ];
 
     /**
@@ -38,8 +38,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [
             'username' => 'required|unique:users,username,' . $id,
             'password' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'unit_id' => 'required|numeric'
+            'email' => 'required|email|unique:users,email,' . $id
         ];
     }
 
@@ -64,8 +63,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     static public function search() {
-        $query = User::select(['users.id', 'users.name', 'users.username', 'users.email', 'users.unit_id', 'units.name as unit_name', 'users.created_at', 'users.updated_at'])
-                ->leftjoin('units', 'units.id', '=', 'users.unit_id');
+        $query = User::select(['users.id', 'users.name', 'users.username', 'users.email', 'users.created_at', 'users.updated_at']);
 
         $data = $query->get();
 

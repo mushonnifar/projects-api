@@ -121,15 +121,11 @@ class UserController extends Controller {
         }
         $name = $request->input('name');
         $email = $request->input('email');
-        $unit_id = $request->input('unit_id');
         if (!empty($name)) {
             $model->name = $name;
         }
         if (!empty($email)) {
             $model->email = $email;
-        }
-        if (!empty($unit_id)) {
-            $model->unit_id = $unit_id;
         }
 
         $model->updated_by = $identity->user_id;
