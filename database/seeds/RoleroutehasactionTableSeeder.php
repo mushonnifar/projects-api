@@ -171,6 +171,22 @@ class RoleroutehasactionTableSeeder extends Seeder {
                 'roleroute_id' => 10,
                 'action_id' => 4
             ],
+            [
+                'roleroute_id' => 11,
+                'action_id' => 1
+            ],
+                [
+                'roleroute_id' => 11,
+                'action_id' => 2
+            ],
+                [
+                'roleroute_id' => 11,
+                'action_id' => 3
+            ],
+                [
+                'roleroute_id' => 11,
+                'action_id' => 4
+            ],
         ]);
     }
 

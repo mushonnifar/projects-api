@@ -51,6 +51,10 @@ class RoutesTableSeeder extends Seeder {
                 'id' => 10,
                 'name' => 'rolerouteaction',
             ],
+                [
+                'id' => 11,
+                'name' => 'route',
+            ],
         ]);
     }
 

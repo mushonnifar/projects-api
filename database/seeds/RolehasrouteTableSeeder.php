@@ -61,6 +61,11 @@ class RolehasrouteTableSeeder extends Seeder {
                 'role_id' => 1,
                 'route_id' => 10
             ],
+            [
+                'id' => 11,
+                'role_id' => 1,
+                'route_id' => 11
+            ],
         ]);
     }
 
