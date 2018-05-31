@@ -43,9 +43,9 @@
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
- * @apiSuccess {String} link link menu
- * @apiSuccess {String} icon icon menu
- * @apiSuccess {Integer} order nomor urut menu
+ * @apiSuccess {String} data.link link menu
+ * @apiSuccess {String} data.icon icon menu
+ * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Integer} data.updated_by id user yang melakukan update data
  * @apiSuccess {Integer} data.created_by id user yang melakukan create data
  * @apiSuccess {Timestamp} data.updated_at waktu update data
@@ -77,9 +77,9 @@
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
- * @apiSuccess {String} link link menu
- * @apiSuccess {String} icon icon menu
- * @apiSuccess {Integer} order nomor urut menu
+ * @apiSuccess {String} data.link link menu
+ * @apiSuccess {String} data.icon icon menu
+ * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
@@ -103,9 +103,9 @@
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
- * @apiSuccess {String} link link menu
- * @apiSuccess {String} icon icon menu
- * @apiSuccess {Integer} order nomor urut menu
+ * @apiSuccess {String} data.link link menu
+ * @apiSuccess {String} data.icon icon menu
+ * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} message Removed successfully
@@ -128,9 +128,9 @@
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
- * @apiSuccess {String} link link menu
- * @apiSuccess {String} icon icon menu
- * @apiSuccess {Integer} order nomor urut menu
+ * @apiSuccess {String} data.link link menu
+ * @apiSuccess {String} data.icon icon menu
+ * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} data.parent_name nama parent
@@ -152,9 +152,9 @@
  * @apiSuccess {Integer} data.parent 0
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
- * @apiSuccess {String} link link menu
- * @apiSuccess {String} icon icon menu
- * @apiSuccess {Integer} order nomor urut menu
+ * @apiSuccess {String} data.link link menu
+ * @apiSuccess {String} data.icon icon menu
+ * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru

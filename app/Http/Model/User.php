@@ -38,6 +38,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [
             'username' => 'required|unique:users,username,' . $id,
             'password' => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id
         ];
     }

@@ -71,12 +71,14 @@
  * 
  * @apiParam {Integer} id id user
  *
- * @apiSuccess {Integer} id id user
- * @apiSuccess {String} name nama user
- * @apiSuccess {String} username username user
- * @apiSuccess {String} email email user
- * @apiSuccess {Timestamp} updated_at waktu update data
- * @apiSuccess {Timestamp} created_at waktu create data
+ * @apiSuccess {Integer} status success
+ * @apiSuccess {Array[]} data array data
+ * @apiSuccess {Integer} data.id id user
+ * @apiSuccess {String} data.name nama user
+ * @apiSuccess {String} data.username username user
+ * @apiSuccess {String} data.email email user
+ * @apiSuccess {Timestamp} data.updated_at waktu update data
+ * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
  *
  */
@@ -155,18 +157,17 @@
  */
 
 /**
- * @api {get} /user/me Get My Identity
+ * @api {get} /user/me/role Get My Identity
  * @apiVersion 0.1.0
  * @apiName Get My Identity
  * @apiGroup User
  *
  * @apiSuccess {Integer} status success
  * @apiSuccess {Array[]} data array data
- * @apiSuccess {Integer} data.id id role
- * @apiSuccess {String} data.name nama user
- * @apiSuccess {String} data.username username user
- * @apiSuccess {String} data.email email user
- * @apiSuccess {Timestamp} data.updated_at waktu update data
- * @apiSuccess {Timestamp} data.created_at waktu create data
+ * @apiSuccess {Integer} data.id id user role
+ * @apiSuccess {Integer} data.user_id id user
+ * @apiSuccess {String} data.nama_user nama user
+ * @apiSuccess {Integer} data.role_id id role
+ * @apiSuccess {String} data.nama_role nama role
  *
  */
