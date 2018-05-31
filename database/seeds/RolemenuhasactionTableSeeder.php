@@ -10,7 +10,7 @@ class RolemenuhasactionTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('rolemenuhasaction')->insert([
+        app('db')->table('std_rolemenuhasaction')->insert([
                 [
                 'rolemenu_id' => 1,
                 'action_id' => 1

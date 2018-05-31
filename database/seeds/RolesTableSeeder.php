@@ -10,7 +10,7 @@ class RolesTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('roles')->insert([
+        app('db')->table('std_roles')->insert([
             'id' => 1,
             'name' => 'admin',
             'description' => 'administrator',

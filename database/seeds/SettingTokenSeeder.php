@@ -11,7 +11,7 @@ class SettingTokenSeeder extends Seeder {
      */
     public function run() {
         //
-        app('db')->table('setting_token')->insert([
+        app('db')->table('std_setting_token')->insert([
             'id' => 1,
             'valid_time' => 10
         ]);

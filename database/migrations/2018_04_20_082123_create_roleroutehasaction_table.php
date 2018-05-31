@@ -12,15 +12,15 @@ class CreateRoleroutehasactionTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('roleroutehasaction', function (Blueprint $table) {
+        Schema::create('std_roleroutehasaction', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('roleroute_id')->unsigned();
             $table->integer('action_id')->unsigned();
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->timestamps();
-            $table->foreign('roleroute_id')->references('id')->on('rolehasroute');
-            $table->foreign('action_id')->references('id')->on('actions');
+            $table->foreign('roleroute_id')->references('id')->on('std_rolehasroute');
+            $table->foreign('action_id')->references('id')->on('std_actions');
         });
     }
 
@@ -30,7 +30,7 @@ class CreateRoleroutehasactionTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('roleroutehasaction');
+        Schema::dropIfExists('std_roleroutehasaction');
     }
 
 }

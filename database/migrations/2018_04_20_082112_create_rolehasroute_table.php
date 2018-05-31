@@ -12,7 +12,7 @@ class CreateRolehasrouteTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('rolehasroute', function (Blueprint $table) {
+        Schema::create('std_rolehasroute', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('role_id')->unsigned();
             $table->integer('route_id')->unsigned();
@@ -20,8 +20,8 @@ class CreateRolehasrouteTable extends Migration {
             $table->integer('updated_by');
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('route_id')->references('id')->on('routes');
+            $table->foreign('role_id')->references('id')->on('std_roles');
+            $table->foreign('route_id')->references('id')->on('std_routes');
         });
     }
 
@@ -31,7 +31,7 @@ class CreateRolehasrouteTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('rolehasroute');
+        Schema::dropIfExists('std_rolehasroute');
     }
 
 }

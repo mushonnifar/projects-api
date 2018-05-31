@@ -10,7 +10,7 @@ class RolehasmenuTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('rolehasmenu')->insert([
+        app('db')->table('std_rolehasmenu')->insert([
                 [
                 'id' => 1,
                 'role_id' => 1,

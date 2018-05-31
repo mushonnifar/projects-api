@@ -13,7 +13,7 @@ class CreateAccessTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('access_tokens', function (Blueprint $table) {
+        Schema::create('std_access_tokens', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token',300);
             $table->integer('expires_at');
@@ -31,6 +31,6 @@ class CreateAccessTokensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('access_tokens');
+        Schema::dropIfExists('std_access_tokens');
     }
 }

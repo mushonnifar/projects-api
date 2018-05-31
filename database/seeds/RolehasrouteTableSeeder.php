@@ -10,7 +10,7 @@ class RolehasrouteTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('rolehasroute')->insert([
+        app('db')->table('std_rolehasroute')->insert([
                 [
                 'id' => 1,
                 'role_id' => 1,

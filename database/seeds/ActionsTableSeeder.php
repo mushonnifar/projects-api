@@ -11,7 +11,7 @@ class ActionsTableSeeder extends Seeder {
      */
     public function run() {
         //
-        app('db')->table('actions')->insert([
+        app('db')->table('std_actions')->insert([
                 [
                 'id' => 1,
                 'name' => 'create'

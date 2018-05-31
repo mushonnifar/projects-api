@@ -13,7 +13,7 @@ class CreateSettingTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create('setting_token', function (Blueprint $table) {
+        Schema::create('std_setting_token', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('valid_time');
         });
@@ -26,6 +26,6 @@ class CreateSettingTokenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_token');
+        Schema::dropIfExists('std_setting_token');
     }
 }

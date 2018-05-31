@@ -10,7 +10,7 @@ class RoutesTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('routes')->insert([
+        app('db')->table('std_routes')->insert([
                 [
                 'id' => 1,
                 'name' => 'user'

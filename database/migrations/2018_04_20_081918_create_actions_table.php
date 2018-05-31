@@ -13,7 +13,7 @@ class CreateActionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('actions', function (Blueprint $table) {
+        Schema::create('std_actions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -30,6 +30,6 @@ class CreateActionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actions');
+        Schema::dropIfExists('std_actions');
     }
 }

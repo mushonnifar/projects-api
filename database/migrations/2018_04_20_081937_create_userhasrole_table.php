@@ -13,7 +13,7 @@ class CreateUserhasroleTable extends Migration
      */
     public function up()
     {
-        Schema::create('userhasrole', function (Blueprint $table) {
+        Schema::create('std_userhasrole', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
@@ -21,8 +21,8 @@ class CreateUserhasroleTable extends Migration
             $table->integer('updated_by');
             $table->timestamps();
             
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('user_id')->references('id')->on('std_users');
+            $table->foreign('role_id')->references('id')->on('std_roles');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateUserhasroleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userhasrole');
+        Schema::dropIfExists('std_userhasrole');
     }
 }

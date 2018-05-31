@@ -12,7 +12,7 @@ class CreateRoutesTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('std_routes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -29,7 +29,7 @@ class CreateRoutesTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('std_routes');
     }
 
 }

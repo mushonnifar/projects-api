@@ -10,7 +10,7 @@ class MenusTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        app('db')->table('menus')->insert([
+        app('db')->table('std_menus')->insert([
                 [
                 'id' => 1,
                 'parent' => 0,

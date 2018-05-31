@@ -12,7 +12,7 @@ class UserhasroleTableSeeder extends Seeder {
      */
     public function run() {
         //
-        app('db')->table('userhasrole')->insert([
+        app('db')->table('std_userhasrole')->insert([
             'id' => 1,
             'user_id' => 1,
             'role_id' => 1

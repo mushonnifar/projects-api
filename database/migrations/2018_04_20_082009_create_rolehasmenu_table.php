@@ -12,7 +12,7 @@ class CreateRolehasmenuTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('rolehasmenu', function (Blueprint $table) {
+        Schema::create('std_rolehasmenu', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('role_id')->unsigned();
             $table->integer('menu_id')->unsigned();
@@ -20,8 +20,8 @@ class CreateRolehasmenuTable extends Migration {
             $table->integer('updated_by');
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('role_id')->references('id')->on('std_roles');
+            $table->foreign('menu_id')->references('id')->on('std_menus');
         });
     }
 
@@ -31,7 +31,7 @@ class CreateRolehasmenuTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('rolehasmenu');
+        Schema::dropIfExists('std_rolehasmenu');
     }
 
 }

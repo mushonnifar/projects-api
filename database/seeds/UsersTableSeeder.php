@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder {
      */
     public function run() {
         //
-        app('db')->table('users')->insert([
+        app('db')->table('std_users')->insert([
             'id' => 1,
             'name' => 'administrator',
             'username' => 'admin',
