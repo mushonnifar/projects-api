@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder {
             RoleroutehasactionTableSeeder::class,
             RolehasmenuTableSeeder::class,
             RolemenuhasactionTableSeeder::class,
+            UserhasroleTableSeeder::class,
             SettingTokenSeeder::class
         ]);
     }
