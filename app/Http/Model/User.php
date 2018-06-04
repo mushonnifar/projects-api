@@ -64,7 +64,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     static public function search() {
-        $query = User::select(['std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.created_at', 'std_users.updated_at']);
+        $query = app('db')->table('std_users')
+                ->leftJoin('std_userhasrole', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->leftJoin('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id');
+//        $query = User::select(['std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.created_at', 'std_users.updated_at']);
 
         $data = $query->get();
 
@@ -99,6 +103,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
                 ->where('std_userhasrole.id', $id)
                 ->get();
 
+        return $data;
+    }
+    
+    public static function getUserById($id){
+        $data = app('db')->table('std_users')
+                ->leftJoin('std_userhasrole', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->leftJoin('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id')
+                ->where('std_users.id', $id)
+                ->first();
+
+        return $data;
+    }
+    
+    static public function deleteById($id) {
+        $data = app('db')->table('std_users')->where('id', $id)->delete();
         return $data;
     }
 }

@@ -41,7 +41,7 @@ class Userhasrole extends Model {
 
         return $data;
     }
-    
+
     static public function getByIdFirst($id) {
         $data = app('db')->table('std_userhasrole')
                 ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
@@ -52,7 +52,7 @@ class Userhasrole extends Model {
 
         return $data;
     }
-    
+
     static public function getByUser($id) {
         $data = app('db')->table('std_userhasrole')
                 ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
@@ -63,4 +63,10 @@ class Userhasrole extends Model {
 
         return $data;
     }
+
+    static public function deleteByUser($id) {
+        $data = app('db')->table('std_userhasrole')->where('user_id', $id)->delete();
+        return $data;
+    }
+
 }

@@ -63,7 +63,7 @@ class UserController extends Controller {
 
         $model = User::create($attributes);
 
-        if (isset($attributes['role_id'])) {
+        if ($attributes['role_id'] != 0) {
             $attributeUser = ["user_id" => $model->id, "role_id" => $attributes['role_id']];
             Userhasrole::create($attributeUser);
         }
@@ -144,12 +144,13 @@ class UserController extends Controller {
 
     public function delete($id) {
         $model = $this->findModel($id);
-        $model->delete();
-
+        Userhasrole::deleteByUser($model->id);
+        $delete = User::deleteById($id);
+       
         $response = [
             'status' => 'success',
             'message' => 'Removed successfully.',
-            'data' => $model,
+            'data' => $delete,
             'token' => $this->getToken($this->request)
         ];
 
@@ -179,7 +180,7 @@ class UserController extends Controller {
 
     private function findModel($id) {
 
-        $model = User::find($id);
+        $model = User::getUserById($id);
         if (!$model) {
             $response = [
                 'status' => 'errors',
