@@ -36,10 +36,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     static public function rules($id = NULL) {
         return [
-            'username' => 'required|unique:users,username,' . $id,
+            'username' => 'required|unique:std_users,username,' . $id,
             'password' => 'required',
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id
+            'email' => 'required|email|unique:std_users,email,' . $id
         ];
     }
 

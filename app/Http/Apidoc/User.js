@@ -32,6 +32,7 @@
  * @apiParam {String} username username user
  * @apiParam {String} password password user
  * @apiParam {String} email email user
+ * @apiParam {Integer} role_id id role user
  *
  * @apiSuccess {String} status success
  * @apiSuccess {String} message data has been added

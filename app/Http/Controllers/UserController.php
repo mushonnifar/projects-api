@@ -63,6 +63,11 @@ class UserController extends Controller {
 
         $model = User::create($attributes);
 
+        if (isset($attributes['role_id'])) {
+            $attributeUser = ["user_id" => $model->id, "role_id" => $attributes['role_id']];
+            Userhasrole::create($attributeUser);
+        }
+
         $response = [
             'status' => "success",
             'message' => "data has been added",
