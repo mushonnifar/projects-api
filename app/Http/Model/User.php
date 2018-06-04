@@ -14,7 +14,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable,
         Authorizable;
 
-    protected $table = "users";
+    protected $table = "std_users";
 
     /**
      * The attributes that are mass assignable.
@@ -64,7 +64,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     static public function search() {
-        $query = User::select(['users.id', 'users.name', 'users.username', 'users.email', 'users.created_at', 'users.updated_at']);
+        $query = User::select(['std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.created_at', 'std_users.updated_at']);
 
         $data = $query->get();
 
@@ -92,11 +92,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     public static function getById($id){
-        $data = app('db')->table('userhasrole')
-                ->join('users', 'users.id', '=', 'userhasrole.user_id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->select('userhasrole.id', 'userhasrole.user_id', 'users.name as nama_user', 'userhasrole.role_id', 'roles.name as nama_role')
-                ->where('userhasrole.id', $id)
+        $data = app('db')->table('std_userhasrole')
+                ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role')
+                ->where('std_userhasrole.id', $id)
                 ->get();
 
         return $data;
