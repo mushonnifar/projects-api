@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Routes extends Model {
 
-    protected $table = 'routes';
+    protected $table = 'std_routes';
     protected $fillable = ['name', 'description', 'isactive', 'created_by', 'updated_by'];
 
     static public function rules() {

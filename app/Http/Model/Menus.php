@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menus extends Model {
 
-    protected $table = 'menus';
+    protected $table = 'std_menus';
     protected $fillable = ['parent', 'name', 'description', 'link', 'order', 'icon', 'isactive', 'created_by', 'updated_by'];
 
     static public function rules() {
@@ -28,16 +28,16 @@ class Menus extends Model {
     }
 
     static public function getParentByRole($id) {
-        $data = app('db')->table('users')
-                ->join('userhasrole', 'userhasrole.user_id', '=', 'users.id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->join('rolehasmenu', 'rolehasmenu.role_id', '=', 'roles.id')
-                ->join('menus', 'menus.id', '=', 'rolehasmenu.menu_id')
-                ->join('rolemenuhasaction', 'rolemenuhasaction.rolemenu_id', '=', 'rolehasmenu.id')
-                ->select('menus.id', 'menus.name', 'menus.description', 'menus.link', 'menus.icon', 'menus.order')
-                ->where('users.id', $id)
-                ->where('rolemenuhasaction.action_id', 2)
-                ->where('menus.parent', 0)
+        $data = app('db')->table('std_users')
+                ->join('std_userhasrole', 'std_userhasrole.user_id', '=', 'std_users.id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->join('std_rolehasmenu', 'std_rolehasmenu.role_id', '=', 'std_roles.id')
+                ->join('std_menus', 'std_menus.id', '=', 'std_rolehasmenu.menu_id')
+                ->join('std_rolemenuhasaction', 'std_rolemenuhasaction.rolemenu_id', '=', 'std_rolehasmenu.id')
+                ->select('std_menus.id', 'std_menus.name', 'std_menus.description', 'std_menus.link', 'std_menus.icon', 'std_menus.order')
+                ->where('std_users.id', $id)
+                ->where('std_rolemenuhasaction.action_id', 2)
+                ->where('std_menus.parent', 0)
                 ->orderBy('order', 'asc')
                 ->get();
 
@@ -45,16 +45,16 @@ class Menus extends Model {
     }
 
     static public function getChildByRole($id) {
-        $data = app('db')->table('users')
-                ->join('userhasrole', 'userhasrole.user_id', '=', 'users.id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->join('rolehasmenu', 'rolehasmenu.role_id', '=', 'roles.id')
-                ->join('menus', 'menus.id', '=', 'rolehasmenu.menu_id')
-                ->join('rolemenuhasaction', 'rolemenuhasaction.rolemenu_id', '=', 'rolehasmenu.id')
-                ->select('menus.id', 'menus.parent', 'menus.name', 'menus.description', 'menus.link', 'menus.icon', 'menus.order')
-                ->where('users.id', $id)
-                ->where('rolemenuhasaction.action_id', 2)
-                ->where('menus.parent', '!=', 0)
+        $data = app('db')->table('std_users')
+                ->join('std_userhasrole', 'std_userhasrole.user_id', '=', 'std_users.id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->join('std_rolehasmenu', 'std_rolehasmenu.role_id', '=', 'std_roles.id')
+                ->join('std_menus', 'std_menus.id', '=', 'std_rolehasmenu.menu_id')
+                ->join('std_rolemenuhasaction', 'std_rolemenuhasaction.rolemenu_id', '=', 'std_rolehasmenu.id')
+                ->select('std_menus.id', 'std_menus.parent', 'std_menus.name', 'std_menus.description', 'std_menus.link', 'std_menus.icon', 'std_menus.order')
+                ->where('std_users.id', $id)
+                ->where('std_rolemenuhasaction.action_id', 2)
+                ->where('std_menus.parent', '!=', 0)
                 ->orderBy('order', 'asc')
                 ->get();
 

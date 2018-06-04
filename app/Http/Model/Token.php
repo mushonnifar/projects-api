@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Token extends Model {
 
-    protected $table = 'setting_token';
+    protected $table = 'std_setting_token';
 
 }

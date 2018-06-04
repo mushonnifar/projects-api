@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rolehasmenu extends Model {
 
-    protected $table = 'rolehasmenu';
+    protected $table = 'std_rolehasmenu';
     protected $fillable = ['menu_id', 'role_id', 'created_by', 'updated_by'];
 
     static public function rules() {
@@ -18,10 +18,10 @@ class Rolehasmenu extends Model {
 
     static public function search() {
 
-        $query = app('db')->table('rolehasmenu')
-                ->join('roles', 'roles.id', '=', 'rolehasmenu.role_id')
-                ->join('menus', 'menus.id', '=', 'rolehasmenu.menu_id')
-                ->select('rolehasmenu.id', 'rolehasmenu.role_id', 'roles.name as nama_role', 'rolehasmenu.menu_id', 'menus.name as nama_menu');
+        $query = app('db')->table('std_rolehasmenu')
+                ->join('std_roles', 'std_roles.id', '=', 'std_rolehasmenu.role_id')
+                ->join('std_menus', 'std_menus.id', '=', 'std_rolehasmenu.menu_id')
+                ->select('std_rolehasmenu.id', 'std_rolehasmenu.role_id', 'std_roles.name as nama_role', 'std_rolehasmenu.menu_id', 'std_menus.name as nama_menu');
         $data = $query->get();
 
         return [
@@ -31,11 +31,11 @@ class Rolehasmenu extends Model {
     }
 
     static public function getById($id) {
-        $data = app('db')->table('rolehasmenu')
-                ->join('menus', 'menus.id', '=', 'rolehasmenu.menu_id')
-                ->join('roles', 'roles.id', '=', 'rolehasmenu.role_id')
-                ->select('rolehasmenu.id', 'rolehasmenu.menu_id', 'menus.name as nama_menu', 'rolehasmenu.role_id', 'roles.name as nama_role')
-                ->where('rolehasmenu.id', $id)
+        $data = app('db')->table('std_rolehasmenu')
+                ->join('std_menus', 'std_menus.id', '=', 'std_rolehasmenu.menu_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_rolehasmenu.role_id')
+                ->select('std_rolehasmenu.id', 'std_rolehasmenu.menu_id', 'std_menus.name as nama_menu', 'std_rolehasmenu.role_id', 'std_roles.name as nama_role')
+                ->where('std_rolehasmenu.id', $id)
                 ->get();
 
         return $data;

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rolehasroute extends Model {
 
-    protected $table = 'rolehasroute';
+    protected $table = 'std_rolehasroute';
     protected $fillable = ['route_id', 'role_id', 'created_by', 'updated_by'];
 
     static public function rules() {
@@ -17,10 +17,10 @@ class Rolehasroute extends Model {
     }
 
     static public function search() {
-        $query = app('db')->table('rolehasroute')
-                ->join('roles', 'roles.id', '=', 'rolehasroute.role_id')
-                ->join('routes', 'routes.id', '=', 'rolehasroute.route_id')
-                ->select('rolehasroute.id', 'rolehasroute.role_id', 'roles.name as nama_role', 'rolehasroute.route_id', 'routes.name as nama_route');
+        $query = app('db')->table('std_rolehasroute')
+                ->join('std_roles', 'std_roles.id', '=', 'std_rolehasroute.role_id')
+                ->join('std_routes', 'std_routes.id', '=', 'std_rolehasroute.route_id')
+                ->select('std_rolehasroute.id', 'std_rolehasroute.role_id', 'std_roles.name as nama_role', 'std_rolehasroute.route_id', 'std_routes.name as nama_route');
 
         $data = $query->get();
 
@@ -31,18 +31,18 @@ class Rolehasroute extends Model {
     }
 
     static public function getById($id) {
-        $data = app('db')->table('rolehasroute')
-                ->join('routes', 'routes.id', '=', 'rolehasroute.route_id')
-                ->join('roles', 'roles.id', '=', 'rolehasroute.role_id')
-                ->select('rolehasroute.id', 'rolehasroute.route_id', 'routes.name as nama_route', 'rolehasroute.role_id', 'roles.name as nama_role')
-                ->where('rolehasroute.id', $id)
+        $data = app('db')->table('std_rolehasroute')
+                ->join('std_routes', 'std_routes.id', '=', 'std_rolehasroute.route_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_rolehasroute.role_id')
+                ->select('std_rolehasroute.id', 'std_rolehasroute.route_id', 'std_routes.name as nama_route', 'std_rolehasroute.role_id', 'std_roles.name as nama_role')
+                ->where('std_rolehasroute.id', $id)
                 ->get();
 
         return $data;
     }
 
     static public function updateData($data, $id) {
-        $update = app('db')->table('rolehasroute')
+        $update = app('db')->table('std_rolehasroute')
                 ->where('id', $id)
                 ->update($data);
 

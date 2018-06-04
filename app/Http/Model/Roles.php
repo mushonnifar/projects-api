@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model {
 
+    protected $table = 'std_roles';
     protected $fillable = ['name', 'description', 'created_by', 'updated_by'];
 
     static public function rules() {

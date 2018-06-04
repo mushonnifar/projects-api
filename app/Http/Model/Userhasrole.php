@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Userhasrole extends Model {
 
-    protected $table = 'userhasrole';
+    protected $table = 'std_userhasrole';
     protected $fillable = ['user_id', 'role_id', 'created_by', 'updated_by'];
 
     static public function rules() {
@@ -18,10 +18,10 @@ class Userhasrole extends Model {
 
     static public function search() {
 
-        $query = app('db')->table('userhasrole')
-                ->join('users', 'users.id', '=', 'userhasrole.user_id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->select('userhasrole.id', 'userhasrole.user_id', 'users.name as nama_user', 'userhasrole.role_id', 'roles.name as nama_role');
+        $query = app('db')->table('std_userhasrole')
+                ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role');
 
         $data = $query->get();
 
@@ -32,33 +32,33 @@ class Userhasrole extends Model {
     }
 
     static public function getById($id) {
-        $data = app('db')->table('userhasrole')
-                ->join('users', 'users.id', '=', 'userhasrole.user_id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->select('userhasrole.id', 'userhasrole.user_id', 'users.name as nama_user', 'userhasrole.role_id', 'roles.name as nama_role')
-                ->where('userhasrole.id', $id)
+        $data = app('db')->table('std_userhasrole')
+                ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role')
+                ->where('std_userhasrole.id', $id)
                 ->get();
 
         return $data;
     }
     
     static public function getByIdFirst($id) {
-        $data = app('db')->table('userhasrole')
-                ->join('users', 'users.id', '=', 'userhasrole.user_id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->select('userhasrole.id', 'userhasrole.user_id', 'users.name as nama_user', 'userhasrole.role_id', 'roles.name as nama_role')
-                ->where('userhasrole.id', $id)
+        $data = app('db')->table('std_userhasrole')
+                ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role')
+                ->where('std_userhasrole.id', $id)
                 ->first();
 
         return $data;
     }
     
     static public function getByUser($id) {
-        $data = app('db')->table('userhasrole')
-                ->join('users', 'users.id', '=', 'userhasrole.user_id')
-                ->join('roles', 'roles.id', '=', 'userhasrole.role_id')
-                ->select('userhasrole.id', 'userhasrole.user_id', 'users.name as nama_user', 'userhasrole.role_id', 'roles.name as nama_role')
-                ->where('userhasrole.user_id', $id)
+        $data = app('db')->table('std_userhasrole')
+                ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
+                ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
+                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role')
+                ->where('std_userhasrole.user_id', $id)
                 ->get();
 
         return $data;

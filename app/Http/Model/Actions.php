@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Actions extends Model {
 
+    protected $table = 'std_actions';
     protected $fillable = ['name', 'description', 'created_by', 'updated_by'];
 
     static public function rules() {
