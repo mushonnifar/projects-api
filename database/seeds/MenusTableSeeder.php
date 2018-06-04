@@ -26,7 +26,7 @@ class MenusTableSeeder extends Seeder {
                 'name' => 'User Management',
                 'description' => 'Management User',
                 'link' => 'routeMasterUser',
-                'icon' => 'fa fa-user-o',
+                'icon' => 'fa fa-users',
                 'order' => 3
             ],
                 [
@@ -52,7 +52,7 @@ class MenusTableSeeder extends Seeder {
                 'parent' => 1,
                 'name' => 'Master Route',
                 'description' => 'Management Route',
-                'link' => 'routeMasterRoutes',
+                'link' => 'routeMasterRoute',
                 'icon' => 'fa fa-circle-o',
                 'order' => 4
             ],

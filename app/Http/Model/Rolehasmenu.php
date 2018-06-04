@@ -50,24 +50,24 @@ class Rolehasmenu extends Model {
     }
 
     static public function getPrivilegeByRole($id) {
-        $data = app('db')->table('rolehasmenu')
-                ->join('menus', 'menus.id', '=', 'rolehasmenu.menu_id')
-                ->join('rolemenuhasaction', 'rolemenuhasaction.rolemenu_id', '=', 'rolehasmenu.id')
-                ->join('actions', 'actions.id', '=', 'rolemenuhasaction.action_id')
-                ->select('rolemenuhasaction.id', 'rolehasmenu.menu_id', 'menus.name as nama_menu', 'rolemenuhasaction.action_id', 'actions.name as nama_action')
-                ->where('rolehasmenu.role_id', $id)
+        $data = app('db')->table('std_rolehasmenu')
+                ->join('std_menus', 'std_menus.id', '=', 'std_rolehasmenu.menu_id')
+                ->join('std_rolemenuhasaction', 'std_rolemenuhasaction.rolemenu_id', '=', 'std_rolehasmenu.id')
+                ->join('std_actions', 'std_actions.id', '=', 'std_rolemenuhasaction.action_id')
+                ->select('std_rolemenuhasaction.id', 'std_rolehasmenu.menu_id', 'std_menus.name as nama_menu', 'std_rolemenuhasaction.action_id', 'std_actions.name as nama_action')
+                ->where('std_rolehasmenu.role_id', $id)
                 ->get();
 
         return $data;
     }
     
     static public function getAction($menu_id, $role_id){
-        $data = app('db')->table('rolehasmenu')
-                ->join('rolemenuhasaction', 'rolemenuhasaction.rolemenu_id', '=', 'rolehasmenu.id')
-                ->join('actions', 'actions.id', '=', 'rolemenuhasaction.action_id')
-                ->select('rolemenuhasaction.id', 'rolehasmenu.menu_id', 'rolemenuhasaction.action_id', 'actions.name as nama_action')
-                ->where('rolehasmenu.role_id', $role_id)
-                ->where('rolehasmenu.menu_id', $menu_id)
+        $data = app('db')->table('std_rolehasmenu')
+                ->join('std_rolemenuhasaction', 'std_rolemenuhasaction.rolemenu_id', '=', 'std_rolehasmenu.id')
+                ->join('std_actions', 'std_actions.id', '=', 'std_rolemenuhasaction.action_id')
+                ->select('std_rolemenuhasaction.id', 'std_rolehasmenu.menu_id', 'std_rolemenuhasaction.action_id', 'std_actions.name as nama_action')
+                ->where('std_rolehasmenu.role_id', $role_id)
+                ->where('std_rolehasmenu.menu_id', $menu_id)
                 ->get();
 
         return $data;
