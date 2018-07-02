@@ -48,5 +48,10 @@ class Rolehasroute extends Model {
 
         return $update;
     }
+    
+    static public function getRoleRouteActione($role_id){
+        $data = app('db')->table('std_rolehasroute')
+                ->join('std_roleroutehasaction', 'std_roleroutehasaction.roleroute_id');
+    }
 
 }

@@ -45,8 +45,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     static public function updateRules($id = NULL) {
         return [
-            'username' => 'required|unique:users,username,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => 'required|unique:std_users,username,' . $id,
+            'email' => 'required|email|unique:std_users,email,' . $id,
         ];
     }
 

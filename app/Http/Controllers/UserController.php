@@ -111,7 +111,7 @@ class UserController extends Controller {
     public function update(Request $request, $id) {
         $identity = $this->getIdentity($request);
 
-        $model = $this->findModel($id);
+        $model = $this->findModelUpdate($id);
         $this->validate($request, User::updateRules($id));
 
         $model->username = $request->input('username');
@@ -135,6 +135,15 @@ class UserController extends Controller {
 
         $model->updated_by = $identity->user_id;
         $model->save();
+        
+        if($this->cekUserRole($model->id) && $request->input('role_id') == 0){
+            $this->deleteUserRole($model->id);
+        } else if($this->cekUserRole($model->id) && $request->input('role_id') != 0){
+            $this->updateUserRole($model->id, $request->input('role_id'));
+        } else if(!$this->cekUserRole($model->id) && $request->input('role_id') != 0) {
+            $attr = array("user_id"=>$model->id,"role_id"=>$request->input('role_id'));
+            $this->createUserRole($attr);
+        }
 
         $response['data'] = $model;
         $response['token'] = $this->getToken($request);
@@ -176,6 +185,20 @@ class UserController extends Controller {
         ];
 
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+    }
+    
+    private function findModelUpdate($id) {
+        $model = User::find($id);
+        if (!$model) {
+            $response = [
+                'status' => 'errors',
+                'message' => "Invalid Record"
+            ];
+
+            response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
+            die;
+        }
+        return $model;
     }
 
     private function findModel($id) {
@@ -238,5 +261,24 @@ class UserController extends Controller {
         }
         return $message;
     }
+    
+    private function cekUserRole($user_id){
+        $userrole = Userhasrole::where('user_id', $user_id)->first();
+        if (!$userrole) {
+            return false;
+        }
+        return true;
+    }
 
+    private function deleteUserRole($user_id){
+        UserhasRole::deleteByUser($user_id);
+    }
+    
+    private function updateUserRole($user_id, $role_id){
+        UserhasRole::updateByUser($user_id, $role_id);
+    }
+    
+    private function createUserRole($data){
+        Userhasrole::create($data);
+    }
 }

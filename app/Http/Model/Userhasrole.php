@@ -68,5 +68,11 @@ class Userhasrole extends Model {
         $data = app('db')->table('std_userhasrole')->where('user_id', $id)->delete();
         return $data;
     }
+    
+    static public function updateByUser($user_id, $role_id) {
+        $data = app('db')->table('std_userhasrole')->where('user_id', $user_id)->update(["role_id" => $role_id]);
+        return $data;
+    }
+    
 
 }

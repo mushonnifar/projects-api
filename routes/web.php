@@ -75,7 +75,7 @@ $router->group(['prefix' => 'rolemenu'], function($app) {
     $app->delete('/{id}', ['middleware' => 'authorization:rolemenu,delete', 'uses' => 'RolehasmenuController@delete']);
     $app->get('/', ['middleware' => 'authorization:rolemenu,read', 'uses' => 'RolehasmenuController@index']);
     $app->post('/setaction', ['middleware' => 'authorization:rolemenu,create', 'uses' => 'RolehasmenuController@action']);
-    $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:rolemenu,create', 'uses' => 'RolehasmenuController@deleteAction']);
+    $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:rolemenu,delete', 'uses' => 'RolehasmenuController@deleteAction']);
     $app->get('/getaction/{id}', ['middleware' => 'authorization:rolemenu,read', 'uses' => 'RolehasmenuController@getAction']);
 });
 
@@ -102,6 +102,8 @@ $router->group(['prefix' => 'roleroute'], function($app) {
     $app->get('/{id}', ['middleware' => 'authorization:roleroute,read', 'uses' => 'RolehasrouteController@view']);
     $app->delete('/{id}', ['middleware' => 'authorization:roleroute,delete', 'uses' => 'RolehasrouteController@delete']);
     $app->get('/', ['middleware' => 'authorization:roleroute,read', 'uses' => 'RolehasrouteController@index']);
+    $app->post('/setaction', ['middleware' => 'authorization:roleroute,create', 'uses' => 'RolehasrouteController@action']);
+    $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:roleroute,delete', 'uses' => 'RolehasrouteController@deleteAction']);
 });
 
 $router->group(['prefix' => 'rolerouteaction'], function($app) {
