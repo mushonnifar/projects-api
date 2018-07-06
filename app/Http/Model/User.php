@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'name', 'created_by', 'updated_by'
+        'username', 'email', 'password', 'name', 'unit_kerja_id', 'nip', 'isemployee', 'created_by', 'updated_by'
     ];
 
     /**
@@ -39,7 +39,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'username' => 'required|unique:std_users,username,' . $id,
             'password' => 'required',
             'name' => 'required',
-            'email' => 'required|email|unique:std_users,email,' . $id
+            'email' => 'required|email|unique:std_users,email,' . $id,
+            'unit_kerja_id' => 'required',
+            'isemployee' => 'required',
+            'role_id' => 'required'
         ];
     }
 
@@ -67,13 +70,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $query = app('db')->table('std_users')
                 ->leftJoin('std_userhasrole', 'std_users.id', '=', 'std_userhasrole.user_id')
                 ->leftJoin('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
-                ->select('std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id');
+                ->leftJoin('m_unit_kerja', 'm_unit_kerja.id', '=', 'std_users.unit_kerja_id')
+                ->select('std_users.id','std_users.nip', 'std_users.name', 'std_users.username', 'std_users.email','std_users.isemployee', app('db')->raw("(CASE WHEN (std_users.isemployee = 1) THEN 'yes' ELSE 'no' END) as isemployee_name"), 'std_users.unit_kerja_id', 'm_unit_kerja.name as unit_kerja_name', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id')
+                ->where('std_users.isactive', 'y');
 //        $query = User::select(['std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.created_at', 'std_users.updated_at']);
 
         $data = $query->get();
 
         return [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $data
         ];
     }
@@ -110,8 +117,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $data = app('db')->table('std_users')
                 ->leftJoin('std_userhasrole', 'std_users.id', '=', 'std_userhasrole.user_id')
                 ->leftJoin('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
-                ->select('std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id')
+                ->leftJoin('m_unit_kerja', 'm_unit_kerja.id', '=', 'std_users.unit_kerja_id')
+                ->select('std_userhasrole.id', 'std_users.nip', 'std_userhasrole.user_id', 'std_users.name as user_name', 'std_userhasrole.role_id', 'std_roles.name as role_name', 'std_users.unit_kerja_id','m_unit_kerja.name as unit_kerja_name', 'std_users.isemployee',app('db')->raw("(CASE WHEN (std_users.isemployee = 1) THEN 'yes' ELSE 'no' END) as isemployee_name"))
                 ->where('std_users.id', $id)
+                ->where('std_users.isactive', 'y')
                 ->first();
 
         return $data;

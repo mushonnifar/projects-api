@@ -142,7 +142,9 @@ class MenusController extends Controller {
         }
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $menu
         ];
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);

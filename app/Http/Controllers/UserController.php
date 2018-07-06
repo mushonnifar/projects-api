@@ -34,7 +34,8 @@ class UserController extends Controller {
             $token = $this->createAccesstoken($model->id, $request->ip());
 
             $response = [
-                'status' => "success",
+                'status' => 1,
+                'status_txt' => "success",
                 'message' => $messageLogin,
                 'token' => $token->token,
                 'expires_at' => date('l jS \of F Y h:i:s A', $token->expires_at + (3600 * 7))
@@ -44,7 +45,8 @@ class UserController extends Controller {
         } else {
 
             $response = [
-                'status' => "errors",
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => "Username or Password is wrong"
             ];
 
@@ -69,7 +71,8 @@ class UserController extends Controller {
         }
 
         $response = [
-            'status' => "success",
+            'status' => 1,
+            'status_txt' => "success",
             'message' => "data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
@@ -85,13 +88,15 @@ class UserController extends Controller {
 
         if ($model->delete()) {
             $response = [
-                'status' => "success",
+                'status' => 1,
+                'status_txt' => "success",
                 'message' => "Logged Out Successfully"
             ];
             return response()->json($response, 200, [], JSON_PRETTY_PRINT);
         } else {
             $response = [
-                'status' => "errors",
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => "Invalid request"
             ];
             return response()->json($response, 400, [], JSON_PRETTY_PRINT);
@@ -101,7 +106,8 @@ class UserController extends Controller {
     public function view($id) {
         $model = $this->findModel($id);
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
             'data' => $model,
             'token' => $this->getToken($this->request)
         ];
@@ -110,7 +116,9 @@ class UserController extends Controller {
 
     public function update(Request $request, $id) {
         $identity = $this->getIdentity($request);
-
+        
+        $this->findModel($id);
+        
         $model = $this->findModelUpdate($id);
         $this->validate($request, User::updateRules($id));
 
@@ -118,19 +126,32 @@ class UserController extends Controller {
         $new_password = $request->input('password');
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
         ];
 
         if (!empty($new_password)) {
             $model->password = Hash::make($new_password);
         }
+        $nip= $request->input('nip');
         $name = $request->input('name');
         $email = $request->input('email');
+        $unit_kerja_id= $request->input('unit_kerja_id');
+        $isemployee = $request->input('isemployee');
+        if (!empty($nip)) {
+            $model->nip = $nip;
+        }
         if (!empty($name)) {
             $model->name = $name;
         }
         if (!empty($email)) {
             $model->email = $email;
+        }
+        if (!empty($unit_kerja_id)) {
+            $model->unit_kerja_id = $unit_kerja_id;
+        }
+        if (isset($isemployee)) {
+            $model->isemployee = $isemployee;
         }
 
         $model->updated_by = $identity->user_id;
@@ -152,14 +173,20 @@ class UserController extends Controller {
     }
 
     public function delete($id) {
-        $model = $this->findModel($id);
-        Userhasrole::deleteByUser($model->id);
-        $delete = User::deleteById($id);
-       
+        $model = $this->findModelUpdate($id);
+        $identity = $this->getIdentity($this->request);
+//        Userhasrole::deleteByUser($model->id);
+//        $delete = User::deleteById($id);
+        
+        $model->isactive = 'n';
+        $model->updated_by = $identity->user_id;
+        $model->save();
+        
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully.',
-            'data' => $delete,
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -180,7 +207,9 @@ class UserController extends Controller {
         unset($data['password']);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $data
         ];
 
@@ -191,7 +220,8 @@ class UserController extends Controller {
         $model = User::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -206,7 +236,8 @@ class UserController extends Controller {
         $model = User::getUserById($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -243,8 +274,6 @@ class UserController extends Controller {
         $token = false;
         if (!empty($headers['x-access-token'][0])) {
             $token = $headers['x-access-token'][0];
-        } else if ($request->input('access_token')) {
-            $token = $request->input('access_token');
         }
 
         return $token;

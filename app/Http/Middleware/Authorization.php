@@ -22,14 +22,13 @@ class Authorization {
             $id = $this->findIdentityByAccessToken($headers['x-access-token'][0]);
             if (!$this->cekAkses($id, $route, $action) > 0) {
                 $response = [
-                    'status' => "errors",
+                    'status' => 0,
+                    'status_txt' => "errors",
                     'message' => "Unauthorized"
                 ];
                 response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
                 die;
             }
-        } else if ($request->input('access_token')) {
-            $id = $this->findIdentityByAccessToken($request->input('api_token'));
         }
         return $next($request);
     }
@@ -41,7 +40,8 @@ class Authorization {
             if ($access_token->expires_at < time()) {
 
                 $response = [
-                    'status' => 'errors',
+                    'status' => 0,
+                    'status_txt' => "errors",
                     'message' => "Access token expired"
                 ];
                 response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
@@ -53,7 +53,8 @@ class Authorization {
             return $data->id;
         } else {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => "Access token not found"
             ];
             response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
