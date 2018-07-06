@@ -133,10 +133,10 @@ class UserController extends Controller {
         if (!empty($new_password)) {
             $model->password = Hash::make($new_password);
         }
-        $nip = $request->input('nip');
+        $nip= $request->input('nip');
         $name = $request->input('name');
         $email = $request->input('email');
-        $unit_kerja_id = $request->input('unit_kerja_id');
+        $unit_kerja_id= $request->input('unit_kerja_id');
         $isemployee = $request->input('isemployee');
         if (!empty($nip)) {
             $model->nip = $nip;
@@ -146,6 +146,12 @@ class UserController extends Controller {
         }
         if (!empty($email)) {
             $model->email = $email;
+        }
+        if (!empty($unit_kerja_id)) {
+            $model->unit_kerja_id = $unit_kerja_id;
+        }
+        if (isset($isemployee)) {
+            $model->isemployee = $isemployee;
         }
         if (!empty($unit_kerja_id)) {
             $model->unit_kerja_id = $unit_kerja_id;
@@ -177,11 +183,11 @@ class UserController extends Controller {
         $identity = $this->getIdentity($this->request);
 //        Userhasrole::deleteByUser($model->id);
 //        $delete = User::deleteById($id);
-
+        
         $model->isactive = 'n';
         $model->updated_by = $identity->user_id;
         $model->save();
-
+        
         $response = [
             'status' => 1,
             'status_txt' => 'success',
