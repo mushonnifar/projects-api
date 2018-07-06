@@ -34,8 +34,8 @@ class UserController extends Controller {
             $token = $this->createAccesstoken($model->id, $request->ip());
 
             $response = [
-                'status' => 0,
-                'status_txt' => 'success',
+                'status' => 1,
+                'status_txt' => "success",
                 'message' => $messageLogin,
                 'token' => $token->token,
                 'expires_at' => date('l jS \of F Y h:i:s A', $token->expires_at + (3600 * 7))
@@ -71,7 +71,8 @@ class UserController extends Controller {
         }
 
         $response = [
-            'status' => "success",
+            'status' => 1,
+            'status_txt' => "success",
             'message' => "data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
@@ -105,7 +106,8 @@ class UserController extends Controller {
     public function view($id) {
         $model = $this->findModel($id);
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
             'data' => $model,
             'token' => $this->getToken($this->request)
         ];
@@ -115,6 +117,8 @@ class UserController extends Controller {
     public function update(Request $request, $id) {
         $identity = $this->getIdentity($request);
 
+        $this->findModel($id);
+
         $model = $this->findModelUpdate($id);
         $this->validate($request, User::updateRules($id));
 
@@ -122,30 +126,43 @@ class UserController extends Controller {
         $new_password = $request->input('password');
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
         ];
 
         if (!empty($new_password)) {
             $model->password = Hash::make($new_password);
         }
+        $nip = $request->input('nip');
         $name = $request->input('name');
         $email = $request->input('email');
+        $unit_kerja_id = $request->input('unit_kerja_id');
+        $isemployee = $request->input('isemployee');
+        if (!empty($nip)) {
+            $model->nip = $nip;
+        }
         if (!empty($name)) {
             $model->name = $name;
         }
         if (!empty($email)) {
             $model->email = $email;
         }
+        if (!empty($unit_kerja_id)) {
+            $model->unit_kerja_id = $unit_kerja_id;
+        }
+        if (isset($isemployee)) {
+            $model->isemployee = $isemployee;
+        }
 
         $model->updated_by = $identity->user_id;
         $model->save();
-        
-        if($this->cekUserRole($model->id) && $request->input('role_id') == 0){
+
+        if ($this->cekUserRole($model->id) && $request->input('role_id') == 0) {
             $this->deleteUserRole($model->id);
-        } else if($this->cekUserRole($model->id) && $request->input('role_id') != 0){
+        } else if ($this->cekUserRole($model->id) && $request->input('role_id') != 0) {
             $this->updateUserRole($model->id, $request->input('role_id'));
-        } else if(!$this->cekUserRole($model->id) && $request->input('role_id') != 0) {
-            $attr = array("user_id"=>$model->id,"role_id"=>$request->input('role_id'));
+        } else if (!$this->cekUserRole($model->id) && $request->input('role_id') != 0) {
+            $attr = array("user_id" => $model->id, "role_id" => $request->input('role_id'));
             $this->createUserRole($attr);
         }
 
@@ -156,14 +173,20 @@ class UserController extends Controller {
     }
 
     public function delete($id) {
-        $model = $this->findModel($id);
-        Userhasrole::deleteByUser($model->id);
-        $delete = User::deleteById($id);
-       
+        $model = $this->findModelUpdate($id);
+        $identity = $this->getIdentity($this->request);
+//        Userhasrole::deleteByUser($model->id);
+//        $delete = User::deleteById($id);
+
+        $model->isactive = 'n';
+        $model->updated_by = $identity->user_id;
+        $model->save();
+
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully.',
-            'data' => $delete,
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -186,17 +209,19 @@ class UserController extends Controller {
         $response = [
             'status' => 1,
             'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $data
         ];
 
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);
     }
-    
+
     private function findModelUpdate($id) {
         $model = User::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -211,7 +236,8 @@ class UserController extends Controller {
         $model = User::getUserById($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -248,7 +274,7 @@ class UserController extends Controller {
         $token = false;
         if (!empty($headers['x-access-token'][0])) {
             $token = $headers['x-access-token'][0];
-        } 
+        }
 
         return $token;
     }
@@ -264,8 +290,8 @@ class UserController extends Controller {
         }
         return $message;
     }
-    
-    private function cekUserRole($user_id){
+
+    private function cekUserRole($user_id) {
         $userrole = Userhasrole::where('user_id', $user_id)->first();
         if (!$userrole) {
             return false;
@@ -273,15 +299,16 @@ class UserController extends Controller {
         return true;
     }
 
-    private function deleteUserRole($user_id){
+    private function deleteUserRole($user_id) {
         UserhasRole::deleteByUser($user_id);
     }
-    
-    private function updateUserRole($user_id, $role_id){
+
+    private function updateUserRole($user_id, $role_id) {
         UserhasRole::updateByUser($user_id, $role_id);
     }
-    
-    private function createUserRole($data){
+
+    private function createUserRole($data) {
         Userhasrole::create($data);
     }
+
 }

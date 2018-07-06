@@ -43,7 +43,8 @@ class Controller extends BaseController {
 
         if ($validator->fails()) {
             $response = [
-                'status' => "errors",
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => $validator->errors()
             ];
 

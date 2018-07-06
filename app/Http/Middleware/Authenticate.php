@@ -34,7 +34,8 @@ class Authenticate {
      */
     public function handle($request, Closure $next, $guard = null) {
         $response = [
-            'status' => "errors",
+            'status' => 0,
+            'status_txt' => "errors",
             'message' => "Unauthenticated."
         ];
 

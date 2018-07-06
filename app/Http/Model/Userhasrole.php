@@ -35,7 +35,8 @@ class Userhasrole extends Model {
         $data = app('db')->table('std_userhasrole')
                 ->join('std_users', 'std_users.id', '=', 'std_userhasrole.user_id')
                 ->join('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
-                ->select('std_userhasrole.id', 'std_userhasrole.user_id', 'std_users.name as nama_user', 'std_userhasrole.role_id', 'std_roles.name as nama_role')
+                ->leftJoin('m_unit_kerja', 'm_unit_kerja.id', '=', 'std_users.unit_kerja_id')
+                ->select('std_userhasrole.id', 'std_users.nip', 'std_userhasrole.user_id', 'std_users.name as user_name', 'std_userhasrole.role_id', 'std_roles.name as role_name', 'std_users.unit_kerja_id','m_unit_kerja.name as unit_kerja_name', 'std_users.isemployee',app('db')->raw("(CASE WHEN (std_users.isemployee = 1) THEN 'yes' ELSE 'no' END) as isemployee_name"))
                 ->where('std_userhasrole.id', $id)
                 ->get();
 

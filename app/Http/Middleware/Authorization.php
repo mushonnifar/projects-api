@@ -29,7 +29,7 @@ class Authorization {
                 response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
                 die;
             }
-        } 
+        }
         return $next($request);
     }
 
