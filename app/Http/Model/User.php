@@ -112,6 +112,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
                 ->leftJoin('std_roles', 'std_roles.id', '=', 'std_userhasrole.role_id')
                 ->select('std_users.id', 'std_users.name', 'std_users.username', 'std_users.email', 'std_users.updated_at', 'std_users.created_at', 'std_roles.name as role', 'std_roles.id as role_id')
                 ->where('std_users.id', $id)
+                
                 ->first();
 
         return $data;

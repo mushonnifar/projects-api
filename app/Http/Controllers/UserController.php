@@ -34,7 +34,8 @@ class UserController extends Controller {
             $token = $this->createAccesstoken($model->id, $request->ip());
 
             $response = [
-                'status' => "success",
+                'status' => 0,
+                'status_txt' => 'success',
                 'message' => $messageLogin,
                 'token' => $token->token,
                 'expires_at' => date('l jS \of F Y h:i:s A', $token->expires_at + (3600 * 7))
@@ -44,7 +45,8 @@ class UserController extends Controller {
         } else {
 
             $response = [
-                'status' => "errors",
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => "Username or Password is wrong"
             ];
 
@@ -85,13 +87,15 @@ class UserController extends Controller {
 
         if ($model->delete()) {
             $response = [
-                'status' => "success",
+                'status' => 1,
+                'status_txt' => "success",
                 'message' => "Logged Out Successfully"
             ];
             return response()->json($response, 200, [], JSON_PRETTY_PRINT);
         } else {
             $response = [
-                'status' => "errors",
+                'status' => 0,
+                'status_txt' => "errors",
                 'message' => "Invalid request"
             ];
             return response()->json($response, 400, [], JSON_PRETTY_PRINT);
@@ -180,7 +184,8 @@ class UserController extends Controller {
         unset($data['password']);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
             'data' => $data
         ];
 
@@ -243,9 +248,7 @@ class UserController extends Controller {
         $token = false;
         if (!empty($headers['x-access-token'][0])) {
             $token = $headers['x-access-token'][0];
-        } else if ($request->input('access_token')) {
-            $token = $request->input('access_token');
-        }
+        } 
 
         return $token;
     }

@@ -10,12 +10,14 @@
  * @apiParam {String} username username
  * @apiParam {String} password password
  *
- * @apiSuccess {String} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
  * @apiSuccess {String} message login successfully
  * @apiSuccess {String} token kode token
  * @apiSuccess {Integer} expires_at expired token
  * 
- * @apiError {Integer} status errors
+ * @apiError {Integer} status 0
+ * @apiError {String} status_txt errors
  * @apiError {String} message pesan kesalahan
  */
 
@@ -33,6 +35,9 @@
  * @apiParam {String} password password user
  * @apiParam {String} email email user
  * @apiParam {Integer} role_id id role user
+ * @apiParam {Integer} unit_kerja_id id unit kerja
+ * @apiParam {Integer} nip nomor induk pegawai
+ * @apiParam {Integer} isemployee 1 = employee, 0 = not employee
  *
  * @apiSuccess {String} status success
  * @apiSuccess {String} message data has been added
@@ -57,8 +62,9 @@
  * 
  * @apiHeader {String} x-access-token token
  *
- * @apiSuccess {Integer} status success
- * @apiSuccess {String} data pesan sukses
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message pesan sukses
  * 
  */
 
@@ -163,12 +169,18 @@
  * @apiName Get My Identity
  * @apiGroup User
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message pesan
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id user role
+ * @apiSuccess {String} data.nip NIP
  * @apiSuccess {Integer} data.user_id id user
- * @apiSuccess {String} data.nama_user nama user
+ * @apiSuccess {String} data.user_name nama user
  * @apiSuccess {Integer} data.role_id id role
- * @apiSuccess {String} data.nama_role nama role
+ * @apiSuccess {String} data.role_name nama role
+ * @apiSuccess {Integer} data.unit_kerja_id id unit kerja
+ * @apiSuccess {String} data.unit_kerja_name nama unit kerja
+ * @apiSuccess {Integer} data.isemployee 1 = employee, 0 = not employee
  *
  */

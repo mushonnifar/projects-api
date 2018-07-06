@@ -123,7 +123,8 @@
  * 
  * @apiHeader {String} x-access-token token autentikasi
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 0
+ * @apiSuccess {String} status_txt success
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
@@ -169,7 +170,8 @@
  * 
  * @apiHeader {String} x-access-token token autentikasi
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 0
+ * @apiSuccess {String} status_txt success
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {String} data.name nama menu
@@ -184,8 +186,5 @@
  * @apiSuccess {String} data.data.link link menu
  * @apiSuccess {String} data.data.icon icon menu
  * @apiSuccess {Integer} data.data.order nomor urut menu
- * @apiSuccess {Integer} page halaman
- * @apiSuccess {Integer} size banyak data per halaman
- * @apiSuccess {Integer} totalCount jumlah seluruh data
  * 
  */
