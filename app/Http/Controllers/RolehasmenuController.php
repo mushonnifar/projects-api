@@ -134,19 +134,19 @@ class RolehasmenuController extends Controller {
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);
     }
 
-//    public function getAction($id) {
-//        $models = $this->findPrivilegeRole($id);
-//
-//        $response = [
-//            'status' => 1,
-//            'status_txt' => 'success',
-//            'message' => 'Get data successfully',
-//            'data' => $models,
-//            'token' => $this->getToken($this->request)
-//        ];
-//
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
+    public function getAction($id) {
+        $models = $this->findPrivilegeRole($id);
+
+        $response = [
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
+            'data' => $models,
+            'token' => $this->getToken($this->request)
+        ];
+
+        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+    }
 
     public function deleteAction($id) {
         $this->findModelAction($id);
