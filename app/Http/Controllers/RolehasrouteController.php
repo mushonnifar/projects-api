@@ -15,69 +15,69 @@ class RolehasrouteController extends Controller {
         $this->request = $request;
     }
 
-    public function create(Request $request) {
-        $this->validate($request, Rolehasroute::rules());
+//    public function create(Request $request) {
+//        $this->validate($request, Rolehasroute::rules());
+//
+//        $identity = $this->getIdentity($request);
+//
+//        $attributes = $request->all();
+//        $attributes['created_by'] = $identity['user_id'];
+//        $model = Rolehasroute::create($attributes);
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'token' => $this->getToken($request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function view($id) {
+//        $model = $this->findModel($id);
+//        $response = [
+//            'status' => 'status',
+//            'data' => $model,
+//            'token' => $this->getToken($this->request)
+//        ];
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function update(Request $request, $id) {
+//        $model = $this->findModelUpdate($id);
+//
+//        $this->validate($request, Rolehasroute::rules($id));
+//
+//        $identity = $this->getIdentity($request);
+//
+//        $attributes = $request->all();
+//        $attributes['updated_by'] = $identity['user_id'];
+//        $model->update($attributes);
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'token' => $this->getToken($request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
 
-        $identity = $this->getIdentity($request);
-
-        $attributes = $request->all();
-        $attributes['created_by'] = $identity['user_id'];
-        $model = Rolehasroute::create($attributes);
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'token' => $this->getToken($request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function view($id) {
-        $model = $this->findModel($id);
-        $response = [
-            'status' => 'status',
-            'data' => $model,
-            'token' => $this->getToken($this->request)
-        ];
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function update(Request $request, $id) {
-        $model = $this->findModelUpdate($id);
-
-        $this->validate($request, Rolehasroute::rules($id));
-
-        $identity = $this->getIdentity($request);
-
-        $attributes = $request->all();
-        $attributes['updated_by'] = $identity['user_id'];
-        $model->update($attributes);
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'token' => $this->getToken($request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function delete($id) {
-        $this->findModel($id);
-        
-        $model = Rolehasroute::find($id);
-        $model->delete();
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'message' => 'Removed successfully.',
-            'token' => $this->getToken($this->request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
+//    public function delete($id) {
+//        $this->findModel($id);
+//        
+//        $model = Rolehasroute::find($id);
+//        $model->delete();
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'message' => 'Removed successfully.',
+//            'token' => $this->getToken($this->request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
 
     public function index() {
         $models = Rolehasroute::search();
@@ -115,7 +115,7 @@ class RolehasrouteController extends Controller {
         $model = array(
             'id' => $roleRoute->id,
             'role_id' => $roleRoute->role_id,
-            'menu_id' => $roleRoute->menu_id,
+            'route_id' => $roleRoute->route_id,
             'action_id' => $roleRouteAction->action_id,
             'created_by' => $roleRoute->user_id,
             'created_at' => $roleRouteAction->created_at,
@@ -131,6 +131,20 @@ class RolehasrouteController extends Controller {
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);
     }
     
+    public function getAction($id) {
+        $models = $this->findPrivilegeRole($id);
+
+        $response = [
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
+            'data' => $models,
+            'token' => $this->getToken($this->request)
+        ];
+
+        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+    }
+
     public function deleteAction($id) {      
         $model = $this->findModelAction($id);
         $model->delete();
@@ -192,6 +206,21 @@ class RolehasrouteController extends Controller {
     public function findRoleRoute($role_id, $route_id) {
         $model = Rolehasroute::where('role_id', $role_id)->where('route_id', $route_id)->first();
 
+        return $model;
+    }
+    
+    public function findPrivilegeRole($id) {
+        $model = Rolehasroute::getPrivilegeByRole($id);
+        if (!$model) {
+            $response = [
+                'status' => 0,
+                'status_txt' => 'errors',
+                'message' => "Invalid Record"
+            ];
+
+            response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
+            die;
+        }
         return $model;
     }
 }

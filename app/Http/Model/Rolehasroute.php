@@ -53,5 +53,17 @@ class Rolehasroute extends Model {
         $data = app('db')->table('std_rolehasroute')
                 ->join('std_roleroutehasaction', 'std_roleroutehasaction.roleroute_id');
     }
+    
+    static public function getPrivilegeByRole($id) {
+        $data = app('db')->table('std_rolehasroute')
+                ->join('std_routes', 'std_routes.id', '=', 'std_rolehasroute.route_id')
+                ->join('std_roleroutehasaction', 'std_roleroutehasaction.roleroute_id', '=', 'std_rolehasroute.id')
+                ->join('std_actions', 'std_actions.id', '=', 'std_roleroutehasaction.action_id')
+                ->select('std_roleroutehasaction.id', 'std_rolehasroute.route_id', 'std_routes.name as nama_route', 'std_roleroutehasaction.action_id', 'std_actions.name as nama_action')
+                ->where('std_rolehasroute.role_id', $id)
+                ->get();
+
+        return $data;
+    }
 
 }
