@@ -24,7 +24,9 @@ class RoutesController extends Controller {
         $model = Routes::create($attributes);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -35,7 +37,9 @@ class RoutesController extends Controller {
     public function view($id) {
         $model = $this->findModel($id);
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Get data successfully",
             'data' => $model,
             'token' => $this->getToken($this->request)
         ];
@@ -54,7 +58,9 @@ class RoutesController extends Controller {
         $model->update($attributes);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Data has been updated",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -67,9 +73,10 @@ class RoutesController extends Controller {
         $model->delete();
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Removed successfully',
             'data' => $model,
-            'message' => 'Removed successfully.',
             'token' => $this->getToken($this->request)
         ];
 
@@ -90,7 +97,8 @@ class RoutesController extends Controller {
         $model = Routes::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 

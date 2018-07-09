@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Roles extends Model {
 
     protected $table = 'std_roles';
-    protected $fillable = ['name', 'description', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'description', 'isactive', 'created_by', 'updated_by'];
 
     static public function rules() {
         return [
@@ -17,12 +17,14 @@ class Roles extends Model {
 
     static public function search() {
 
-        $query = Roles::select(['id', 'name', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at']);
+        $query = Roles::select(['id', 'name', 'description', 'isactive', 'created_by', 'updated_by', 'created_at', 'updated_at']);
 
         $data = $query->get();
 
         return [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $data
         ];
     }
