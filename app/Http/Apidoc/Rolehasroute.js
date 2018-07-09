@@ -10,15 +10,17 @@
  * @apiParam {Integer} route_id id route
  * @apiParam {Integer} action_id id action
  *
- * @apiSuccess {String} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Data has been added
  * @apiSuccess {Array[]} data array data
- * @apiSuccess {Integer} data.route_id id route
+ * @apiSuccess {Integer} data.id id role route action
  * @apiSuccess {Integer} data.role_id id role
+ * @apiSuccess {Integer} data.route_id id route
  * @apiSuccess {Integer} data.action_id id action
  * @apiSuccess {Integer} data.created_by id user yang melakukan create
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
- * @apiSuccess {Integer} data.id id role route
  * @apiSuccess {String} token kode token baru
  *
  */
@@ -33,13 +35,15 @@
  * 
  * @apiParam {Integer} id id role
  *
- * @apiSuccess {String} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Get data successfully
  * @apiSuccess {Array[]} data array data
- * @apiSuccess {Integer} data.id id route action
+ * @apiSuccess {Integer} data.id id role route action
  * @apiSuccess {Integer} data.route_id id route
- * @apiSuccess {String} data.nama_route nama route
+ * @apiSuccess {String} data.route_name nama route
  * @apiSuccess {Integer} data.action_id id action
- * @apiSuccess {String} data.nama_action nama action
+ * @apiSuccess {String} data.action_name nama action
  * @apiSuccess {String} token kode token baru
  */
 
@@ -53,17 +57,17 @@
  * 
  * @apiParam {Integer} id id role route action
  *
- * @apiSuccess {String} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Removed successfully
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id role route action
- * @apiSuccess {Integer} data.route_id id route
- * @apiSuccess {Integer} data.role_id id role
+ * @apiSuccess {Integer} data.roleroute_id id role route
  * @apiSuccess {Integer} data.action_id id action
  * @apiSuccess {Integer} data.created_by id user yang melakukan create
  * @apiSuccess {Integer} data.updated_by id user yang melakukan update
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
- * @apiSuccess {String} message Removed successfully
  * @apiSuccess {String} token kode token baru
  *
  */
