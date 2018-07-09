@@ -22,7 +22,9 @@ class Routes extends Model {
         $data = $query->get();
 
         return [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
             'data' => $data
         ];
     }

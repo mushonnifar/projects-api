@@ -73,7 +73,7 @@ class UserController extends Controller {
         $response = [
             'status' => 1,
             'status_txt' => "success",
-            'message' => "data has been added",
+            'message' => "Data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -122,22 +122,26 @@ class UserController extends Controller {
         $model = $this->findModelUpdate($id);
         $this->validate($request, User::updateRules($id));
 
-        $model->username = $request->input('username');
         $new_password = $request->input('password');
 
         $response = [
             'status' => 1,
             'status_txt' => 'success',
+            'message' => 'Data has been updated',
         ];
 
         if (!empty($new_password)) {
             $model->password = Hash::make($new_password);
         }
+        $username = $request->input('username');
         $nip= $request->input('nip');
         $name = $request->input('name');
         $email = $request->input('email');
         $unit_kerja_id= $request->input('unit_kerja_id');
         $isemployee = $request->input('isemployee');
+        if (!empty($username)) {
+            $model->username = $username;
+        }
         if (!empty($nip)) {
             $model->nip = $nip;
         }

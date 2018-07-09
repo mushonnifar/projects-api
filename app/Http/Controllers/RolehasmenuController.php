@@ -16,78 +16,78 @@ class RolehasmenuController extends Controller {
         $this->request = $request;
     }
 
-    public function create(Request $request) {
-        $this->validate($request, Rolehasmenu::rules());
-
-        $identity = $this->getIdentity($request);
-
-        $attributes = $request->all();
-        $attributes['created_by'] = $identity['user_id'];
-        $model = Rolehasmenu::create($attributes);
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'token' => $this->getToken($request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function view($id) {
-        $model = $this->findModel($id);
-        $response = [
-            'status' => 'status',
-            'data' => $model,
-            'token' => $this->getToken($this->request)
-        ];
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function update(Request $request, $id) {
-        $model = $this->findModelUpdate($id);
-
-        $this->validate($request, Rolehasmenu::rules($id));
-
-        $identity = $this->getIdentity($request);
-
-        $attributes = $request->all();
-        $attributes['updated_by'] = $identity['user_id'];
-        $model->update($attributes);
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'token' => $this->getToken($request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function delete($id) {
-        $this->findModel($id);
-
-        $model = Rolehasmenu::find($id);
-        $model->delete();
-
-        $response = [
-            'status' => 'success',
-            'data' => $model,
-            'message' => 'Removed successfully.',
-            'token' => $this->getToken($this->request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
-
-    public function index() {
-        $models = Rolehasmenu::search();
-
-        $response = $models;
-        $response['token'] = $this->getToken($this->request);
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
+//    public function create(Request $request) {
+//        $this->validate($request, Rolehasmenu::rules());
+//
+//        $identity = $this->getIdentity($request);
+//
+//        $attributes = $request->all();
+//        $attributes['created_by'] = $identity['user_id'];
+//        $model = Rolehasmenu::create($attributes);
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'token' => $this->getToken($request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function view($id) {
+//        $model = $this->findModel($id);
+//        $response = [
+//            'status' => 'status',
+//            'data' => $model,
+//            'token' => $this->getToken($this->request)
+//        ];
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function update(Request $request, $id) {
+//        $model = $this->findModelUpdate($id);
+//
+//        $this->validate($request, Rolehasmenu::rules($id));
+//
+//        $identity = $this->getIdentity($request);
+//
+//        $attributes = $request->all();
+//        $attributes['updated_by'] = $identity['user_id'];
+//        $model->update($attributes);
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'token' => $this->getToken($request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function delete($id) {
+//        $this->findModel($id);
+//
+//        $model = Rolehasmenu::find($id);
+//        $model->delete();
+//
+//        $response = [
+//            'status' => 'success',
+//            'data' => $model,
+//            'message' => 'Removed successfully.',
+//            'token' => $this->getToken($this->request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
+//
+//    public function index() {
+//        $models = Rolehasmenu::search();
+//
+//        $response = $models;
+//        $response['token'] = $this->getToken($this->request);
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
 
     public function action(Request $request) {
         $this->validate($request, Rolehasmenu::rules());
@@ -124,7 +124,9 @@ class RolehasmenuController extends Controller {
         );
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => "Data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -132,17 +134,19 @@ class RolehasmenuController extends Controller {
         return response()->json($response, 200, [], JSON_PRETTY_PRINT);
     }
 
-    public function getAction($id) {
-        $models = $this->findPrivilegeRole($id);
-
-        $response = [
-            'status' => 'success',
-            'data' => $models,
-            'token' => $this->getToken($this->request)
-        ];
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
+//    public function getAction($id) {
+//        $models = $this->findPrivilegeRole($id);
+//
+//        $response = [
+//            'status' => 1,
+//            'status_txt' => 'success',
+//            'message' => 'Get data successfully',
+//            'data' => $models,
+//            'token' => $this->getToken($this->request)
+//        ];
+//
+//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+//    }
 
     public function deleteAction($id) {
         $this->findModelAction($id);
@@ -153,7 +157,7 @@ class RolehasmenuController extends Controller {
         $response = [
             'status' => 'success',
             'data' => $model,
-            'message' => 'Removed successfully.',
+            'message' => 'Removed successfully',
             'token' => $this->getToken($this->request)
         ];
 
@@ -193,7 +197,8 @@ class RolehasmenuController extends Controller {
         $model = Rolehasmenu::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -213,7 +218,8 @@ class RolehasmenuController extends Controller {
         $model = Rolehasmenu::getPrivilegeByRole($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
