@@ -16,79 +16,6 @@ class RolehasmenuController extends Controller {
         $this->request = $request;
     }
 
-//    public function create(Request $request) {
-//        $this->validate($request, Rolehasmenu::rules());
-//
-//        $identity = $this->getIdentity($request);
-//
-//        $attributes = $request->all();
-//        $attributes['created_by'] = $identity['user_id'];
-//        $model = Rolehasmenu::create($attributes);
-//
-//        $response = [
-//            'status' => 'success',
-//            'data' => $model,
-//            'token' => $this->getToken($request)
-//        ];
-//
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
-//
-//    public function view($id) {
-//        $model = $this->findModel($id);
-//        $response = [
-//            'status' => 'status',
-//            'data' => $model,
-//            'token' => $this->getToken($this->request)
-//        ];
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
-//
-//    public function update(Request $request, $id) {
-//        $model = $this->findModelUpdate($id);
-//
-//        $this->validate($request, Rolehasmenu::rules($id));
-//
-//        $identity = $this->getIdentity($request);
-//
-//        $attributes = $request->all();
-//        $attributes['updated_by'] = $identity['user_id'];
-//        $model->update($attributes);
-//
-//        $response = [
-//            'status' => 'success',
-//            'data' => $model,
-//            'token' => $this->getToken($request)
-//        ];
-//
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
-//
-//    public function delete($id) {
-//        $this->findModel($id);
-//
-//        $model = Rolehasmenu::find($id);
-//        $model->delete();
-//
-//        $response = [
-//            'status' => 'success',
-//            'data' => $model,
-//            'message' => 'Removed successfully.',
-//            'token' => $this->getToken($this->request)
-//        ];
-//
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
-//
-//    public function index() {
-//        $models = Rolehasmenu::search();
-//
-//        $response = $models;
-//        $response['token'] = $this->getToken($this->request);
-//
-//        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-//    }
-
     public function action(Request $request) {
         $this->validate($request, Rolehasmenu::rules());
         $identity = $this->getIdentity($request);
@@ -114,11 +41,11 @@ class RolehasmenuController extends Controller {
         $roleMenuAction = Rolemenuhasaction::create($attributeRoleMenuAction);
 
         $model = array(
-            'id' => $roleMenu->id,
+            'id' => $roleMenuAction->id,
             'role_id' => $roleMenu->role_id,
             'menu_id' => $roleMenu->menu_id,
             'action_id' => $roleMenuAction->action_id,
-            'created_by' => $roleMenu->user_id,
+            'created_by' => $roleMenuAction->created_by,
             'created_at' => $roleMenuAction->created_at,
             'updated_at' => $roleMenuAction->updated_at,
         );
@@ -155,9 +82,10 @@ class RolehasmenuController extends Controller {
         $model->delete();
 
         $response = [
-            'status' => 'success',
-            'data' => $model,
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully',
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -169,7 +97,8 @@ class RolehasmenuController extends Controller {
         $model = Rolehasmenu::getById($id);
         if (count($model) < 1) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -184,7 +113,8 @@ class RolehasmenuController extends Controller {
         $model = Rolemenuhasaction::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
