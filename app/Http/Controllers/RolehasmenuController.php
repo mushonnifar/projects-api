@@ -41,11 +41,11 @@ class RolehasmenuController extends Controller {
         $roleMenuAction = Rolemenuhasaction::create($attributeRoleMenuAction);
 
         $model = array(
-            'id' => $roleMenu->id,
+            'id' => $roleMenuAction->id,
             'role_id' => $roleMenu->role_id,
             'menu_id' => $roleMenu->menu_id,
             'action_id' => $roleMenuAction->action_id,
-            'created_by' => $roleMenu->user_id,
+            'created_by' => $roleMenuAction->created_by,
             'created_at' => $roleMenuAction->created_at,
             'updated_at' => $roleMenuAction->updated_at,
         );
@@ -82,9 +82,10 @@ class RolehasmenuController extends Controller {
         $model->delete();
 
         $response = [
-            'status' => 'success',
-            'data' => $model,
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully',
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -96,7 +97,8 @@ class RolehasmenuController extends Controller {
         $model = Rolehasmenu::getById($id);
         if (count($model) < 1) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -111,7 +113,8 @@ class RolehasmenuController extends Controller {
         $model = Rolemenuhasaction::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
