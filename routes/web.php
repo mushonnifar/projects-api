@@ -72,6 +72,7 @@ $router->group(['prefix' => 'rolemenu'], function($app) {
     $app->post('/setaction', ['middleware' => 'authorization:rolemenu,create', 'uses' => 'RolehasmenuController@action']);
     $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:rolemenu,delete', 'uses' => 'RolehasmenuController@deleteAction']);
     $app->get('/getaction/{id}', ['middleware' => 'authorization:rolemenu,read', 'uses' => 'RolehasmenuController@getAction']);
+    $app->get('/getrolemenu/{id}', ['middleware' => 'authorization:rolemenu,read', 'uses' => 'RolehasmenuController@getByRoleMenu']);
 });
 
 $router->group(['prefix' => 'route'], function($app) {

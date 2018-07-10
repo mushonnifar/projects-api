@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Model\Rolehasmenu;
 use App\Http\Model\Rolemenuhasaction;
+use App\Http\Model\Userhasrole;
 use Illuminate\Http\Request;
 
 class RolehasmenuController extends Controller {
@@ -16,6 +17,21 @@ class RolehasmenuController extends Controller {
         $this->request = $request;
     }
 
+    public function getByRoleMenu($menu_id) {
+        $identity = $this->getIdentity($this->request);
+        $user = Userhasrole::getByIdFirst($identity->user_id);
+        $model = $this->findModelByMenu($menu_id, $user->role_id);
+
+        $response = [
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => 'Get data successfully',
+            'data' => $model
+        ];
+
+        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
+    }
+    
     public function action(Request $request) {
         $this->validate($request, Rolehasmenu::rules());
         $identity = $this->getIdentity($request);
@@ -150,6 +166,20 @@ class RolehasmenuController extends Controller {
             $response = [
                 'status' => 0,
                 'status_txt' => 'errors',
+                'message' => "Invalid Record"
+            ];
+
+            response()->json($response, 400, [], JSON_PRETTY_PRINT)->send();
+            die;
+        }
+        return $model;
+    }
+
+    public function findModelByMenu($menu_id, $role_id) {
+        $model = Rolehasmenu::getAction($menu_id, $role_id);
+        if (count($model) < 1) {
+            $response = [
+                'status' => 'errors',
                 'message' => "Invalid Record"
             ];
 
