@@ -88,4 +88,3 @@ $router->group(['prefix' => 'roleroute'], function($app) {
     $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:roleroute,delete', 'uses' => 'RolehasrouteController@deleteAction']);
     $app->get('/getaction/{id}', ['middleware' => 'authorization:roleroute,read', 'uses' => 'RolehasrouteController@getAction']);
 });
-

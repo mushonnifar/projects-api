@@ -14,15 +14,6 @@ class RolehasrouteController extends Controller {
         
         $this->request = $request;
     }
-
-    public function index() {
-        $models = Rolehasroute::search();
-
-        $response = $models;
-        $response['token'] = $this->getToken($this->request);
-
-        return response()->json($response, 200, [], JSON_PRETTY_PRINT);
-    }
     
     public function action(Request $request) {
         $this->validate($request, Rolehasroute::rules());
@@ -49,17 +40,19 @@ class RolehasrouteController extends Controller {
         $roleRouteAction = Roleroutehasaction::create($attributeRoleRouteAction);
 
         $model = array(
-            'id' => $roleRoute->id,
+            'id' => $roleRouteAction->id,
             'role_id' => $roleRoute->role_id,
             'route_id' => $roleRoute->route_id,
             'action_id' => $roleRouteAction->action_id,
-            'created_by' => $roleRoute->user_id,
+            'created_by' => $roleRouteAction->created_by,
             'created_at' => $roleRouteAction->created_at,
             'updated_at' => $roleRouteAction->updated_at,
         );
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => 'success',
+            'message' => "Data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -86,9 +79,10 @@ class RolehasrouteController extends Controller {
         $model->delete();
 
         $response = [
-            'status' => 'success',
-            'data' => $model,
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully.',
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -100,7 +94,8 @@ class RolehasrouteController extends Controller {
         $model = Roleroutehasaction::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -115,7 +110,8 @@ class RolehasrouteController extends Controller {
         $model = Rolehasroute::getById($id);
         if (count($model) < 1) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
@@ -129,7 +125,8 @@ class RolehasrouteController extends Controller {
         $model = Rolehasroute::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 

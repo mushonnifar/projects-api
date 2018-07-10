@@ -22,7 +22,7 @@ class Roleroutehasaction extends Model {
                 ->join('std_roles', 'std_roles.id', '=', 'std_rolehasroute.role_id')
                 ->join('std_routes', 'std_routes.id', '=', 'std_rolehasroute.route_id')
                 ->join('std_actions', 'std_actions.id', '=', 'std_roleroutehasaction.action_id')
-                ->select('std_roleroutehasaction.id', 'std_rolehasroute.role_id', 'std_roles.name as nama_role', 'std_rolehasroute.route_id', 'std_routes.name as nama_route', 'std_roleroutehasaction.action_id', 'std_actions.name as nama_action');
+                ->select('std_roleroutehasaction.id', 'std_rolehasroute.role_id', 'std_roles.name as role_name', 'std_rolehasroute.route_id', 'std_routes.name as route_name', 'std_roleroutehasaction.action_id', 'std_actions.name as action_name');
 
         $data = $query->get();
 
@@ -38,7 +38,7 @@ class Roleroutehasaction extends Model {
                 ->join('std_roles','std_roles.id','=','std_rolehasroute.role_id')
                 ->join('std_routes', 'std_routes.id', '=', 'std_rolehasroute.route_id')
                 ->join('std_actions', 'std_actions.id', '=', 'std_roleroutehasaction.action_id')
-                ->select('std_roleroutehasaction.id', 'std_rolehasroute.role_id', 'std_roles.name as nama_role', 'std_rolehasroute.route_id', 'std_routes.name as nama_route', 'std_roleroutehasaction.action_id', 'std_actions.name as nama_action')
+                ->select('std_roleroutehasaction.id', 'std_rolehasroute.role_id', 'std_roles.name as role_name', 'std_rolehasroute.route_id', 'std_routes.name as route_name', 'std_roleroutehasaction.action_id', 'std_actions.name as action_name')
                 ->where('std_roleroutehasaction.id', $id)
                 ->get();
 
