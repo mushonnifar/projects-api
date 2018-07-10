@@ -24,7 +24,9 @@ class MenusController extends Controller {
         $model = Menus::create($attributes);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Data has been added",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -35,7 +37,9 @@ class MenusController extends Controller {
     public function view($id) {
         $model = $this->findModel($id);
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Get data successfully",
             'data' => $model,
             'token' => $this->getToken($this->request)
         ];
@@ -54,7 +58,9 @@ class MenusController extends Controller {
         $model->update($attributes);
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Data has been updated",
             'data' => $model,
             'token' => $this->getToken($request)
         ];
@@ -67,9 +73,10 @@ class MenusController extends Controller {
         $model->delete();
 
         $response = [
-            'status' => 'success',
-            'data' => $model,
+            'status' => 1,
+            'status_txt' => 'success',
             'message' => 'Removed successfully.',
+            'data' => $model,
             'token' => $this->getToken($this->request)
         ];
 
@@ -99,7 +106,9 @@ class MenusController extends Controller {
         $models = Menus::where('parent', 0)->get();
 
         $response = [
-            'status' => 'success',
+            'status' => 1,
+            'status_txt' => "success",
+            'message' => "Get data successfully",
             'data' => $models
         ];
         $response['token'] = $this->getToken($this->request);
@@ -155,7 +164,8 @@ class MenusController extends Controller {
         $model = Menus::find($id);
         if (!$model) {
             $response = [
-                'status' => 'errors',
+                'status' => 0,
+                'status_txt' => 'errors',
                 'message' => "Invalid Record"
             ];
 
