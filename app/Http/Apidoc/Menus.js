@@ -1,5 +1,5 @@
 /**
- * @api {post} /menu/ Create menu
+ * @api {post} /menu Create menu
  * @apiVersion 0.1.0
  * @apiName Create Menu
  * @apiGroup Menu
@@ -13,8 +13,11 @@
  * @apiParam {String} icon icon menu
  * @apiParam {Integer} order nomor urut menu
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Data has been added
  * @apiSuccess {Array[]} data array data
+ * @apiSuccess {Integer} data.parent id parent
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
  * @apiSuccess {String} link link menu
@@ -38,9 +41,12 @@
  * 
  * @apiParam {Integer} id id menu
  *
- * @apiSuccess {String} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Get data successfully
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
+ * @apiSuccess {Integer} data.parent id parent
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
  * @apiSuccess {String} data.link link menu
@@ -52,7 +58,8 @@
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
  *
- * @apiError {Integer} status errors
+ * @apiError {Integer} status 0
+ * @apiError {String} status_txt errors
  * @apiError {String} message pesan eror
  */
 
@@ -72,9 +79,12 @@
  * @apiParam {String} icon icon menu
  * @apiParam {Integer} order nomor urut menu
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Data has been updated
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
+ * @apiSuccess {Integer} data.parent id parent
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
  * @apiSuccess {String} data.link link menu
@@ -84,7 +94,8 @@
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
  *
- * @apiError {Integer} status errors
+ * @apiError {Integer} status 0
+ * @apiError {String} status_txt errors
  * @apiError {String} message pesan eror
  */
 
@@ -98,9 +109,12 @@
  *
  * @apiParam {Integer} id id menu
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Removed successfully
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
+ * @apiSuccess {Integer} data.parent id parent
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
  * @apiSuccess {String} data.link link menu
@@ -108,25 +122,27 @@
  * @apiSuccess {Integer} data.order nomor urut menu
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
- * @apiSuccess {String} message Removed successfully
  * @apiSuccess {String} token kode token baru
  *
- * @apiError {Integer} status errors
+ * @apiError {Integer} status 0
+ * @apiError {String} status_txt errors
  * @apiError {String} message pesan eror
  */
 
 /**
- * @api {get} /menu/ Get All Data
+ * @api {get} /menu Get All Data
  * @apiVersion 0.1.0
  * @apiName Get All Data
  * @apiGroup Menu
  * 
  * @apiHeader {String} x-access-token token autentikasi
  *
- * @apiSuccess {Integer} status 0
+ * @apiSuccess {Integer} status 1
  * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Get data successfully
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
+ * @apiSuccess {Integer} data.parent id parent
  * @apiSuccess {String} data.name nama menu
  * @apiSuccess {String} data.description deskripsi menu
  * @apiSuccess {String} data.link link menu
@@ -147,7 +163,9 @@
  * 
  * @apiHeader {String} x-access-token token autentikasi
  *
- * @apiSuccess {Integer} status success
+ * @apiSuccess {Integer} status 1
+ * @apiSuccess {String} status_txt success
+ * @apiSuccess {String} message Get data successfully
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu
  * @apiSuccess {Integer} data.parent 0
@@ -170,7 +188,7 @@
  * 
  * @apiHeader {String} x-access-token token autentikasi
  *
- * @apiSuccess {Integer} status 0
+ * @apiSuccess {Integer} status 1
  * @apiSuccess {String} status_txt success
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id menu

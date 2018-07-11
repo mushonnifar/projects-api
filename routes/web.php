@@ -88,3 +88,19 @@ $router->group(['prefix' => 'roleroute'], function($app) {
     $app->delete('/deleteaction/{id}', ['middleware' => 'authorization:roleroute,delete', 'uses' => 'RolehasrouteController@deleteAction']);
     $app->get('/getaction/{id}', ['middleware' => 'authorization:roleroute,read', 'uses' => 'RolehasrouteController@getAction']);
 });
+
+$router->group(['prefix' => 'unitkerja'], function($app) {
+    $app->post('/', ['middleware' => 'authorization:unitkerja,create', 'uses' => 'UnitKerjaController@create']);
+    $app->put('/{id}', ['middleware' => 'authorization:unitkerja,update', 'uses' => 'UnitKerjaController@update']);
+    $app->get('/{id}', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'UnitKerjaController@view']);
+    $app->delete('/{id}', ['middleware' => 'authorization:unitkerja,delete', 'uses' => 'UnitKerjaController@delete']);
+    $app->get('/', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'UnitKerjaController@index']);
+});
+
+$router->group(['prefix' => 'department'], function($app) {
+    $app->post('/', ['middleware' => 'authorization:unitkerja,create', 'uses' => 'DepartmentController@create']);
+    $app->put('/{id}', ['middleware' => 'authorization:unitkerja,update', 'uses' => 'DepartmentController@update']);
+    $app->get('/{id}', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@view']);
+    $app->delete('/{id}', ['middleware' => 'authorization:unitkerja,delete', 'uses' => 'DepartmentController@delete']);
+    $app->get('/', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@index']);
+});
