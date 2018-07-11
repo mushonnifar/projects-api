@@ -8,14 +8,14 @@
  * @apiHeader {String} x-access-token token autentikasi
  * 
  * @apiParam {String} name nama unit kerja
- * @apiParam {Integer} departement_id id departement
+ * @apiParam {Integer} department_id id department
  *
  * @apiSuccess {Integer} status 1
  * @apiSuccess {String} status_txt success
  * @apiSuccess {String} message Data has been added
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {String} data.name nama unit kerja
- * @apiSuccess {Integer} data.departement_id id departement
+ * @apiSuccess {Integer} data.department_id id department
  * @apiSuccess {Integer} data.created_by id user yang melakukan create
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
@@ -40,7 +40,7 @@
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id unit kerja
  * @apiSuccess {String} data.name nama unit kerja
- * @apiSuccess {Integer} data.departement_id id departement
+ * @apiSuccess {Integer} data.department_id id department
  * @apiSuccess {Integer} data.updated_by id user yang melakukan update data
  * @apiSuccess {Integer} data.created_by id user yang melakukan create data
  * @apiSuccess {Timestamp} data.updated_at waktu update data
@@ -62,7 +62,7 @@
  * 
  * @apiParam {Integer} id id user
  * @apiParam {String} name nama unitkerja
- * @apiParam {Integer} departement_id id departement
+ * @apiParam {Integer} department_id id department
  *
  * @apiSuccess {Integer} status 1
  * @apiSuccess {String} status_txt success
@@ -70,7 +70,7 @@
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id unit kerja
  * @apiSuccess {String} data.name nama unit kerja
- * @apiSuccess {Integer} data.departement_id id departement
+ * @apiSuccess {Integer} data.department_id id department
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
@@ -96,7 +96,7 @@
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id unit kerja
  * @apiSuccess {String} data.name nama unit kerja
- * @apiSuccess {Integer} data.departement_id id departement
+ * @apiSuccess {Integer} data.department_id id department
  * @apiSuccess {Timestamp} data.updated_at waktu update data
  * @apiSuccess {Timestamp} data.created_at waktu create data
  * @apiSuccess {String} token kode token baru
@@ -120,7 +120,7 @@
  * @apiSuccess {Array[]} data array data
  * @apiSuccess {Integer} data.id id unit kerja
  * @apiSuccess {String} data.name nama unit kerja
- * @apiSuccess {Integer} data.departement_id id departement
+ * @apiSuccess {Integer} data.department_id id department
  * @apiSuccess {Integer} data.created_by id user yang melakukan create
  * @apiSuccess {Integer} data.updated_by id user yang melakukan update
  * @apiSuccess {Timestamp} data.updated_at waktu update data

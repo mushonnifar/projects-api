@@ -98,9 +98,17 @@ $router->group(['prefix' => 'unitkerja'], function($app) {
 });
 
 $router->group(['prefix' => 'department'], function($app) {
-    $app->post('/', ['middleware' => 'authorization:unitkerja,create', 'uses' => 'DepartmentController@create']);
-    $app->put('/{id}', ['middleware' => 'authorization:unitkerja,update', 'uses' => 'DepartmentController@update']);
-    $app->get('/{id}', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@view']);
-    $app->delete('/{id}', ['middleware' => 'authorization:unitkerja,delete', 'uses' => 'DepartmentController@delete']);
-    $app->get('/', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@index']);
+    $app->post('/', ['middleware' => 'authorization:department,create', 'uses' => 'DepartmentController@create']);
+    $app->put('/{id}', ['middleware' => 'authorization:department,update', 'uses' => 'DepartmentController@update']);
+    $app->get('/{id}', ['middleware' => 'authorization:department,read', 'uses' => 'DepartmentController@view']);
+    $app->delete('/{id}', ['middleware' => 'authorization:department,delete', 'uses' => 'DepartmentController@delete']);
+    $app->get('/', ['middleware' => 'authorization:department,read', 'uses' => 'DepartmentController@index']);
+});
+
+$router->group(['prefix' => 'jabatan'], function($app) {
+    $app->post('/', ['middleware' => 'authorization:jabatan,create', 'uses' => 'JabatanController@create']);
+    $app->put('/{id}', ['middleware' => 'authorization:jabatan,update', 'uses' => 'JabatanController@update']);
+    $app->get('/{id}', ['middleware' => 'authorization:jabatan,read', 'uses' => 'JabatanController@view']);
+    $app->delete('/{id}', ['middleware' => 'authorization:jabatan,delete', 'uses' => 'JabatanController@delete']);
+    $app->get('/', ['middleware' => 'authorization:jabatan,read', 'uses' => 'JabatanController@index']);
 });
