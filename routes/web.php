@@ -96,3 +96,11 @@ $router->group(['prefix' => 'unitkerja'], function($app) {
     $app->delete('/{id}', ['middleware' => 'authorization:unitkerja,delete', 'uses' => 'UnitKerjaController@delete']);
     $app->get('/', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'UnitKerjaController@index']);
 });
+
+$router->group(['prefix' => 'department'], function($app) {
+    $app->post('/', ['middleware' => 'authorization:unitkerja,create', 'uses' => 'DepartmentController@create']);
+    $app->put('/{id}', ['middleware' => 'authorization:unitkerja,update', 'uses' => 'DepartmentController@update']);
+    $app->get('/{id}', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@view']);
+    $app->delete('/{id}', ['middleware' => 'authorization:unitkerja,delete', 'uses' => 'DepartmentController@delete']);
+    $app->get('/', ['middleware' => 'authorization:unitkerja,read', 'uses' => 'DepartmentController@index']);
+});
